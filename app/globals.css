@@ -1,26 +1,88 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #F8FAFC;
+  --surface: #FFFFFF;
+  --border: #E2E8F0;
+  --heading: #0F172A;
+  --body: #475569;
+  --accent: #0F766E;
+  --accent-hover: #115E59;
+  --accent-foreground: #FFFFFF;
+  --accent-soft: #F0FDFA;
+  --gradient-from: #0F766E;
+  --gradient-to: #2563EB;
+}
+
+.dark {
+  --background: #0A0F1A;
+  --surface: #111827;
+  --border: #1F2937;
+  --heading: #F1F5F9;
+  --body: #94A3B8;
+  --accent: #2DD4BF;
+  --accent-hover: #5EEAD4;
+  --accent-foreground: #04201C;
+  --accent-soft: #0B2A29;
+  --gradient-from: #2DD4BF;
+  --gradient-to: #60A5FA;
 }
 
 @theme inline {
   --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-bg: var(--background);
+  --color-surface: var(--surface);
+  --color-border: var(--border);
+  --color-heading: var(--heading);
+  --color-body: var(--body);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent-fg: var(--accent-foreground);
+  --color-accent-soft: var(--accent-soft);
+  --color-gradient-from: var(--gradient-from);
+  --color-gradient-to: var(--gradient-to);
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  border-color: var(--border);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--background);
+  color: var(--body);
+  font-family: var(--font-sans, system-ui, sans-serif);
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--heading);
+}
+
+/* Gradient text utility for headlines */
+.headline-gradient {
+  background: linear-gradient(135deg, var(--gradient-from), var(--gradient-to));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
